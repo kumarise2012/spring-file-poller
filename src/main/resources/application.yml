@@ -1,0 +1,26 @@
+inbound:
+    failed:
+        path: C:\Users\Santosh Kumar\IdeaProjects\spring-file-poller\inb\failed
+    file:
+        poller:
+            fixed:
+                delay: 1000
+            max:
+                messages:
+                    per:
+                        poll: 5
+            thread:
+                pool:
+                    size: 4
+    filename:
+        regex: ([^\s]+(\.(?i)(csv))$)
+    out:
+        path: C:\Users\Santosh Kumar\IdeaProjects\spring-file-poller\inb\out
+    processed:
+        path: C:\Users\Santosh Kumar\IdeaProjects\spring-file-poller\inb\processed
+    read:
+        path: C:\Users\Santosh Kumar\IdeaProjects\spring-file-poller\inb\read
+out:
+    filename:
+        dateFormat: yyyy_MM_dd_HH_mm_ss_SSS
+        suffix: .csv
