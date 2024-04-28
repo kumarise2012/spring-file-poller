@@ -1,4 +1,4 @@
-package com.porterhead.integration.configuration;
+package com.spring.poller.example.integration.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

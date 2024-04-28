@@ -1,6 +1,6 @@
-package com.porterhead.integration.file;
+package com.spring.poller.example.integration.file;
 
-import com.porterhead.integration.configuration.ApplicationConfiguration;
+import com.spring.poller.example.integration.configuration.ApplicationConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;

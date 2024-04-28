@@ -1,7 +1,7 @@
-package com.porterhead.integration.writer;
+package com.spring.poller.example.integration.writer;
 
 
-import com.porterhead.integration.configuration.ApplicationConfiguration;
+import com.spring.poller.example.integration.configuration.ApplicationConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

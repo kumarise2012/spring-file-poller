@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.porterhead</groupId>
+    <groupId>com.spring.poller.example</groupId>
     <artifactId>spring-file-poller</artifactId>
     <name>File Polling Service</name>
     <packaging>jar</packaging>

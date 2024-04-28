@@ -1,4 +1,4 @@
-package com.porterhead.integration;
+package com.spring.poller.example.integration;
 
 
 import org.springframework.core.io.ClassPathResource;

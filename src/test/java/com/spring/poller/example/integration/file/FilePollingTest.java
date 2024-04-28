@@ -1,8 +1,8 @@
-package com.porterhead.integration.file;
+package com.spring.poller.example.integration.file;
 
 
-import com.porterhead.integration.TestUtils;
-import com.porterhead.integration.configuration.ApplicationConfiguration;
+import com.spring.poller.example.integration.TestUtils;
+import com.spring.poller.example.integration.configuration.ApplicationConfiguration;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +20,6 @@ import java.io.File;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static com.porterhead.integration.TestUtils.assertThatDirectoryHasFiles;
-import static com.porterhead.integration.TestUtils.assertThatDirectoryIsEmpty;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.springframework.util.FileCopyUtils.copy;
@@ -70,20 +68,20 @@ public class FilePollingTest  {
         });
         copy(TestUtils.locateClasspathResource(TestUtils.FILE_FIXTURE_PATH), new File(inboundReadDirectory, TestUtils.FILE_FIXTURE_NAME ));
         assertThat(latch.await(5, TimeUnit.SECONDS), is(true));
-        assertThatDirectoryIsEmpty(inboundReadDirectory);
-        assertThatDirectoryIsEmpty(inboundFailedDirectory);
-        assertThatDirectoryHasFiles(inboundOutDirectory, 1);
-        assertThatDirectoryHasFiles(inboundProcessedDirectory, 1);
+        TestUtils.assertThatDirectoryIsEmpty(inboundReadDirectory);
+        TestUtils.assertThatDirectoryIsEmpty(inboundFailedDirectory);
+        TestUtils.assertThatDirectoryHasFiles(inboundOutDirectory, 1);
+        TestUtils.assertThatDirectoryHasFiles(inboundProcessedDirectory, 1);
     }
 
     @Test
     public void pollIgnoresInvalidFile() throws Exception {
         copy(TestUtils.locateClasspathResource(TestUtils.FILE_FIXTURE_PATH), new File(inboundReadDirectory, TestUtils.FILE_FIXTURE_NAME + ".tmp" ));
         Thread.sleep(2000); //enough time to ensure the file has been read and ignored before the test finishes
-        assertThatDirectoryIsEmpty(inboundProcessedDirectory);
-        assertThatDirectoryIsEmpty(inboundFailedDirectory);
-        assertThatDirectoryIsEmpty(inboundOutDirectory);
-        assertThatDirectoryHasFiles(inboundReadDirectory, 1);
+        TestUtils.assertThatDirectoryIsEmpty(inboundProcessedDirectory);
+        TestUtils.assertThatDirectoryIsEmpty(inboundFailedDirectory);
+        TestUtils.assertThatDirectoryIsEmpty(inboundOutDirectory);
+        TestUtils.assertThatDirectoryHasFiles(inboundReadDirectory, 1);
     }
 
     @Test
@@ -98,16 +96,16 @@ public class FilePollingTest  {
         copy(TestUtils.locateClasspathResource(TestUtils.FILE_FIXTURE_PATH), new File(inboundReadDirectory, TestUtils.FILE_FIXTURE_NAME ));
         //wait for stopLatch before asserting
         assertThat(stopLatch.await(5, TimeUnit.SECONDS), is(true));
-        assertThatDirectoryHasFiles(inboundProcessedDirectory, 1);
-        assertThatDirectoryHasFiles(inboundOutDirectory, 1);
-        assertThatDirectoryIsEmpty(inboundReadDirectory);
-        assertThatDirectoryIsEmpty(inboundFailedDirectory);
+        TestUtils.assertThatDirectoryHasFiles(inboundProcessedDirectory, 1);
+        TestUtils.assertThatDirectoryHasFiles(inboundOutDirectory, 1);
+        TestUtils.assertThatDirectoryIsEmpty(inboundReadDirectory);
+        TestUtils.assertThatDirectoryIsEmpty(inboundFailedDirectory);
         copy(TestUtils.locateClasspathResource(TestUtils.FILE_FIXTURE_PATH), new File(inboundReadDirectory, TestUtils.FILE_FIXTURE_NAME ));
         Thread.sleep(2000); //wait longer than the polling period
-        assertThatDirectoryIsEmpty(inboundFailedDirectory);
-        assertThatDirectoryHasFiles(inboundReadDirectory, 1);
-        assertThatDirectoryHasFiles(inboundProcessedDirectory, 1);
-        assertThatDirectoryHasFiles(inboundOutDirectory, 1);
+        TestUtils.assertThatDirectoryIsEmpty(inboundFailedDirectory);
+        TestUtils.assertThatDirectoryHasFiles(inboundReadDirectory, 1);
+        TestUtils.assertThatDirectoryHasFiles(inboundProcessedDirectory, 1);
+        TestUtils.assertThatDirectoryHasFiles(inboundOutDirectory, 1);
     }
 
     @Test
@@ -122,10 +120,10 @@ public class FilePollingTest  {
         });
         copy(TestUtils.locateClasspathResource(TestUtils.FILE_FIXTURE_PATH), new File(inboundReadDirectory, TestUtils.FILE_FIXTURE_NAME ));
         assertThat(stopLatch.await(5, TimeUnit.SECONDS), is(true));
-        assertThatDirectoryIsEmpty(inboundReadDirectory);
-        assertThatDirectoryIsEmpty(inboundProcessedDirectory);
-        assertThatDirectoryIsEmpty(inboundOutDirectory);
-        assertThatDirectoryHasFiles(inboundFailedDirectory, 1);
+        TestUtils.assertThatDirectoryIsEmpty(inboundReadDirectory);
+        TestUtils.assertThatDirectoryIsEmpty(inboundProcessedDirectory);
+        TestUtils.assertThatDirectoryIsEmpty(inboundOutDirectory);
+        TestUtils.assertThatDirectoryHasFiles(inboundFailedDirectory, 1);
     }
 
 }

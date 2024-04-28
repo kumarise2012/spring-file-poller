@@ -1,4 +1,4 @@
-package com.porterhead.integration.file;
+package com.spring.poller.example.integration.file;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
